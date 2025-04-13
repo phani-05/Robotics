@@ -1,0 +1,173 @@
+<?xml version='1.0'?>
+
+<robot name="mogi_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find amr)/urdf/mogi_bot.gazebo" />
+  <xacro:include filename="$(find amr)/urdf/materials.xacro" />
+
+
+  <link name="base_footprint"></link>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+  </joint>
+
+  <link name='base_link'>
+    <pose>0 0 0.1 0 0 0</pose>
+    
+    <inertial>
+      <mass value="24.18896015187"/>
+      <origin xyz="0.0035 0 0.0298" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.4457" ixy="0" ixz="-0.0016"
+          iyy="1.3370" iyz="0"
+          izz="1.7679"
+      />
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/> 
+      <geometry>
+        <mesh filename="package://amr/meshes/base_link.dae"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy=" 0 0 0"/>
+      <geometry>
+        <mesh filename="package://amr/meshes/base_link.dae"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <!-- Camera link -->
+  <joint name="cam_joint" type="fixed">
+    <origin xyz="0.45 -0.0034 0.0296" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="cam_link" />
+  </joint>
+  <link name="cam_link">
+    <inertial>
+      <mass value="0.2379"/>
+      <origin xyz="0.0275 0 0" rpy=" 0 0 0"/>
+    </inertial>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://amr/meshes/cam_link.dae" />
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://amr/meshes/cam_link.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+  <!-- Lidar link -->
+  <joint name="scan_joint" type="continuous">
+    <origin xyz="0.2624 0 0.1025" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="scan_link" />
+    <axis xyz="0 0 1" />
+  </joint>
+
+  <link name="scan_link">
+    <inertial>
+      <mass value="1.1486"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </inertial>
+
+    <collision>
+      <geometry>
+        <mesh filename="package://amr/meshes/scan_link.dae" />
+      </geometry>
+    </collision>
+
+    <visual>
+      <geometry>
+        <mesh filename="package://amr/meshes/scan_link.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+  <!-- Wheels -->
+  <joint type="continuous" name="left_wheel_joint">
+    <origin xyz="-0.2 0.325 0.03" rpy="0 0 0"/>
+    <child link="bl_link"/>
+    <parent link="base_link"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="100" velocity="10"/>
+    <dynamics damping="1.0" friction="1.0"/>
+  </joint>
+
+  <link name="bl_link">
+    <collision>
+      <geometry>
+        <mesh filename="package://amr/meshes/bl_link.dae" />
+      </geometry>
+    </collision>
+    <visual>
+      <geometry>
+        <mesh filename="package://amr/meshes/bl_link.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+  <joint type="continuous" name="right_wheel_joint">
+    <origin xyz="-0.2 -0.325 0.03" rpy="0 0 0"/>
+    <child link="br_link"/>
+    <parent link="base_link"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="100" velocity="10"/>
+    <dynamics damping="1.0" friction="1.0"/>
+  </joint>
+
+  <link name="br_link">
+    <collision>
+      <geometry>
+        <mesh filename="package://amr/meshes/br_link.dae" />
+      </geometry>
+    </collision>
+    <visual>
+      <geometry>
+        <mesh filename="package://amr/meshes/br_link.dae" />
+      </geometry>
+    </visual>
+  </link>
+
+  <!-- IMU -->
+  <joint name="imu_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="imu_link" />
+  </joint>
+
+  <link name="imu_link"></link>
+
+  <!-- Gazebo properties -->
+  <gazebo reference="bl_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+
+  <gazebo reference="br_link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+
+  <gazebo reference="base_link">
+    <mu1>0.000001</mu1>
+    <mu2>0.000001</mu2>
+  </gazebo>
+
+  <gazebo reference="scan_link">
+    <selfCollide>false</selfCollide>
+  </gazebo>
+
+</robot>

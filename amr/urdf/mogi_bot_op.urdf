@@ -1,0 +1,172 @@
+<?xml version='1.0'?>
+
+<robot name="mogi_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Gazebo plugin -->
+  <xacro:include filename="$(find amr)/urdf/mogi_bot.gazebo" />
+
+  <!-- RViz colors -->
+  <xacro:include filename="$(find amr)/urdf/materials.xacro" />
+
+  <!-- Base footprint -->
+  <link name="base_footprint"></link>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+  </joint>
+
+  <!-- Base link -->
+  <link name="base_link">
+    <pose>0 0 0.1 0 0 0</pose>
+    <inertial>
+      <mass value="24.18896015187"/>
+      <origin xyz="0.00352569881585465 0 0.029778052350789" rpy="0 0 0"/>
+      <inertia
+          ixx="0.445702072485829" ixy="-1.09524669411341E-17" ixz="-0.00161371855176445"
+          iyy="1.33702490315788" iyz="-3.42667276651173E-18"
+          izz="1.76788911068777"
+      />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amr/meshes/base_link.dae"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amr/meshes/base_link.dae"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <!-- Camera -->
+  <joint type="fixed" name="camera_joint">
+    <origin xyz="0.225 0 0.075" rpy="0 0 0"/>
+    <child link="camera_link"/>
+    <parent link="base_link"/>
+  </joint>
+
+  <link name="camera_link">
+    <pose>0 0 0 0 0 0</pose>
+    <inertial>
+      <mass value="0.1"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia
+          ixx="1e-6" ixy="0" ixz="0"
+          iyy="1e-6" iyz="0"
+          izz="1e-6"
+      />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size=".03 .03 .03"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size=".03 .03 .03"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <!-- Lidar -->
+  <joint type="fixed" name="scan_joint">
+    <origin xyz="0.0 0 0.15" rpy="0 0 0"/>
+    <child link="scan_link"/>
+    <parent link="base_link"/>
+  </joint>
+
+  <link name="scan_link">
+    <inertial>
+      <mass value="1e-5"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia
+          ixx="1e-6" ixy="0" ixz="0"
+          iyy="1e-6" iyz="0"
+          izz="1e-6"
+      />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size=".1 .1 .1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://amr/meshes/lidar.dae"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <!-- Wheels -->
+  <joint type="continuous" name="left_wheel_joint">
+    <origin xyz="0 0.15 0" rpy="0 0 0"/>
+    <child link="left_wheel"/>
+    <parent link="base_link"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <link name="left_wheel">
+    <inertial>
+      <mass value="5.0"/>
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <inertia
+          ixx="0.014" ixy="0" ixz="0"
+          iyy="0.014" iyz="0"
+          izz="0.025"
+      />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder radius=".1" length=".05"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+        <mesh filename="package://amr/meshes/wheel.dae"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint type="continuous" name="right_wheel_joint">
+    <origin xyz="0 -0.15 0" rpy="0 0 0"/>
+    <child link="right_wheel"/>
+    <parent link="base_link"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <link name="right_wheel">
+    <inertial>
+      <mass value="5.0"/>
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <inertia
+          ixx="0.014" ixy="0" ixz="0"
+          iyy="0.014" iyz="0"
+          izz="0.025"
+      />
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+        <cylinder radius=".1" length=".05"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
+      <geometry>
+        <mesh filename="package://amr/meshes/wheel.dae"/>
+      </geometry>
+    </visual>
+  </link>
+
+</robot>
