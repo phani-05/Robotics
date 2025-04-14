@@ -1,11 +1,14 @@
 <?xml version='1.0'?>
 
-<robot name="mogi_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="amr" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:include filename="$(find amr)/urdf/mogi_bot.gazebo" />
-  <xacro:include filename="$(find amr)/urdf/materials.xacro" />
+  <!-- STEP 3 - Gazebo plugin -->
+  <xacro:include filename="$(find bme_ros2_navigation)/urdf/mogi_bot.gazebo" />
 
+  <!-- STEP 4 - RViz colors -->
+  <xacro:include filename="$(find bme_ros2_navigation)/urdf/materials.xacro" />
 
+  <!-- STEP 1 - Robot chassis -->
   <link name="base_footprint"></link>
 
   <joint name="base_footprint_joint" type="fixed">
@@ -14,160 +17,297 @@
     <child link="base_link" />
   </joint>
 
-  <link name='base_link'>
-    <pose>0 0 0.1 0 0 0</pose>
-    
+  <link
+    name="base_link">
     <inertial>
-      <mass value="24.18896015187"/>
-      <origin xyz="0.0035 0 0.0298" rpy=" 0 0 0"/>
+      <origin
+        xyz="0.0035257 4.335E-17 0.029778"
+        rpy="0 0 0" />
+      <mass
+        value="24.189" />
       <inertia
-          ixx="0.4457" ixy="0" ixz="-0.0016"
-          iyy="1.3370" iyz="0"
-          izz="1.7679"
-      />
+        ixx="0.4457"
+        ixy="-1.0952E-17"
+        ixz="-0.0016137"
+        iyy="1.337"
+        iyz="-3.4267E-18"
+        izz="1.7679" />
     </inertial>
-
-    <collision>
-      <origin xyz="0 0 0" rpy=" 0 0 0"/> 
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://amr/meshes/base_link.dae"/>
+        <mesh
+          filename="package://amr/meshes/backup_files/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.9098 0.44314 0.031373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://amr/meshes/backup_files/base_link.STL" />
       </geometry>
     </collision>
-
-    <visual>
-      <origin xyz="0 0 0" rpy=" 0 0 0"/>
-      <geometry>
-        <mesh filename="package://amr/meshes/base_link.dae"/>
-      </geometry>
-    </visual>
   </link>
-
-  <!-- Camera link -->
-  <joint name="cam_joint" type="fixed">
-    <origin xyz="0.45 -0.0034 0.0296" rpy="0 0 0" />
-    <parent link="base_link" />
-    <child link="cam_link" />
-  </joint>
-  <link name="cam_link">
+  <link
+    name="cam_link">
     <inertial>
-      <mass value="0.2379"/>
-      <origin xyz="0.0275 0 0" rpy=" 0 0 0"/>
+      <origin
+        xyz="0.0275 4.77048955893622E-18 3.46944695195361E-18"
+        rpy="0 0 0" />
+      <mass
+        value="0.23789184766465" />
+      <inertia
+        ixx="0.000175183282733029"
+        ixy="-2.22158371450883E-20"
+        ixz="-3.34847332380176E-21"
+        iyy="0.000129675171711136"
+        iyz="2.82913889894448E-21"
+        izz="0.000165445250886155" />
     </inertial>
-
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://amr/meshes/cam_link.dae" />
+        <mesh
+          filename="package://amr/meshes/backup_files/cam_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://amr/meshes/backup_files/cam_link.STL" />
       </geometry>
     </collision>
-
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://amr/meshes/cam_link.dae" />
-      </geometry>
-    </visual>
   </link>
-
-  <!-- Lidar link -->
-  <joint name="scan_joint" type="continuous">
-    <origin xyz="0.2624 0 0.1025" rpy="0 0 0" />
-    <parent link="base_link" />
-    <child link="scan_link" />
-    <axis xyz="0 0 1" />
+  <joint
+    name="cam_joint"
+    type="fixed">
+    <origin
+      xyz="0.45 -0.0033621 0.029649"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="cam_link" />
+    <axis
+      xyz="0 0 0" />
+    <limit effort="100" velocity="10"/>
+    <dynamics damping="1.0" friction="1.0"/> 
   </joint>
-
-  <link name="scan_link">
+  <link
+    name="scan_link">
     <inertial>
-      <mass value="1.1486"/>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="1.1486" />
+      <inertia
+        ixx="0.0020197"
+        ixy="1.4682E-19"
+        ixz="7.6145E-36"
+        iyy="0.0020197"
+        iyz="-4.7166E-36"
+        izz="0.0032306" />
     </inertial>
-
-    <collision>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://amr/meshes/scan_link.dae" />
+        <mesh
+          filename="package://amr/meshes/backup_files/scan_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0.75294 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="-0.2 0.325 0.03"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://amr/meshes/backup_files/scan_link.STL" />
       </geometry>
     </collision>
-
-    <visual>
-      <geometry>
-        <mesh filename="package://amr/meshes/scan_link.dae" />
-      </geometry>
-    </visual>
   </link>
-
-  <!-- Wheels -->
-  <joint type="continuous" name="left_wheel_joint">
-    <origin xyz="-0.2 0.325 0.03" rpy="0 0 0"/>
-    <child link="bl_link"/>
-    <parent link="base_link"/>
-    <axis xyz="0 1 0"/>
+  <joint
+    name="scan_joint"
+    type="fixed">
+    <origin
+      xyz="0.26245 0 0.1025"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="scan_link" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="br_link">
+    <inertial>
+      <origin
+        xyz="-5.15976150694542E-14 0.0299999999989126 9.95384330515492E-15"
+        rpy="0 0 0" />
+      <mass
+        value="2.11669573162388" />
+      <inertia
+        ixx="0.00765610745147789"
+        ixy="2.27359291565592E-15"
+        ixz="-1.69598496257701E-14"
+        iyy="0.01404488198059"
+        iyz="3.78667047176713E-16"
+        izz="0.00765610745117356" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://amr/meshes/backup_files/br_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.898039215686275 0.898039215686275 0.898039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://amr/meshes/backup_files/br_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="right_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="-0.2 -0.325 0.03"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="br_link" />
+    <axis
+      xyz="0 1 0" />
     <limit effort="100" velocity="10"/>
-    <dynamics damping="1.0" friction="1.0"/>
+    <dynamics damping="1.0" friction="1.0"/>  
   </joint>
-
-  <link name="bl_link">
-    <collision>
+  <link
+    name="bl_link">
+    <inertial>
+      <origin
+        xyz="-5.5123E-14 0.03 2.1164E-14"
+        rpy="0 0 0" />
+      <mass
+        value="2.1167" />
+      <inertia
+        ixx="0.0076561"
+        ixy="2.8522E-15"
+        ixz="-5.5789E-14"
+        iyy="0.014045"
+        iyz="-1.2121E-16"
+        izz="0.0076561" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://amr/meshes/bl_link.dae" />
+        <mesh
+          filename="package://amr/meshes/backup_files/bl_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.89804 0.89804 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://amr/meshes/backup_files/bl_link.STL" />
       </geometry>
     </collision>
-    <visual>
-      <geometry>
-        <mesh filename="package://amr/meshes/bl_link.dae" />
-      </geometry>
-    </visual>
   </link>
 
-  <joint type="continuous" name="right_wheel_joint">
-    <origin xyz="-0.2 -0.325 0.03" rpy="0 0 0"/>
-    <child link="br_link"/>
-    <parent link="base_link"/>
-    <axis xyz="0 1 0"/>
+  <joint
+    name="left_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="-0.2 0.325 0.03"
+      rpy="0 0 3.14159265358979" />
+    <parent
+      link="base_link" />
+    <child
+      link="bl_link" />
+    <axis
+      xyz="0 -1 0" />
     <limit effort="100" velocity="10"/>
-    <dynamics damping="1.0" friction="1.0"/>
+    <dynamics damping="1.0" friction="1.0"/>  
   </joint>
-
-  <link name="br_link">
-    <collision>
-      <geometry>
-        <mesh filename="package://amr/meshes/br_link.dae" />
-      </geometry>
-    </collision>
-    <visual>
-      <geometry>
-        <mesh filename="package://amr/meshes/br_link.dae" />
-      </geometry>
-    </visual>
-  </link>
-
-  <!-- IMU -->
-  <joint name="imu_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 0" />
-    <parent link="base_link"/>
-    <child link="imu_link" />
-  </joint>
-
-  <link name="imu_link"></link>
-
-  <!-- Gazebo properties -->
-  <gazebo reference="bl_link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-
-  <gazebo reference="br_link">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
-  </gazebo>
-
-  <gazebo reference="base_link">
-    <mu1>0.000001</mu1>
-    <mu2>0.000001</mu2>
-  </gazebo>
 
   <gazebo reference="scan_link">
     <selfCollide>false</selfCollide>
+    <mu1 value="0.05" />
+    <mu2 value="0.05" />
+  </gazebo>
+  
+  <gazebo reference="left_wheel">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.0001</minDepth>
+    <maxVel>1.0</maxVel>
+  </gazebo>
+
+  <gazebo reference="right_wheel">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.0001</minDepth>
+    <maxVel>1.0</maxVel>
+  </gazebo>
+
+  <gazebo reference="base_link">
+    <mu1>0.000002</mu1>
+    <mu2>0.000002</mu2>
+  </gazebo>
+
+  <gazebo reference="camera_link">
+    <material>Gazebo/Red</material>
   </gazebo>
 
 </robot>
