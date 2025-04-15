@@ -24,7 +24,6 @@
  - **Wheels Seperation** = 650mm
  - **Wheel Radius** = 109.79 + Tire Depth = 4.97mm, total = 114.76
 
--#(about)
  Added IMU Package to resolve the IMU Pugin dependicies
  
  
