@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<robot name="hand" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <material name="red">
+        <color rgba="1 0 0 1" />
+    </material>
+
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="0.3 0.07 0.3" />
+            </geometry>
+            <origin xyz="0 0 0.15" rpy="0 0 0"/>
+            <material name="red"/>
+        </visual>
+    </link>
+
+    <xacro:macro name="finger_link" params="prefix ">
+        <link name="${prefix}_finger_link">
+            <visual>
+                <geometry>
+                    <cylinder radius="0.025" length="0.1" />
+                </geometry>
+                <origin xyz="0 0 0.05" rpy="0 0 0" />
+                <material name="red" />
+            </visual>
+        </link>
+    </xacro:macro>
+
+    
+
+    <xacro:finger_link prefix="finger_2" />
+    <xacro:finger_link prefix="finger_1" />
+    <xacro:finger_link prefix="finger_3" />
+    <xacro:finger_link prefix="finger_4" />
+    <xacro:finger_link prefix="thumb" />
+
+
+    <xacro:macro name="centre_knuckle_finger_link" params="prefix length ">
+        <link name="${prefix}_centre_knuckle_finger_link">
+            <visual>
+                <geometry>
+                    <cylinder radius="0.02" length="${length}" />
+                </geometry>
+                <origin xyz="0 0 ${length / 2.0}" rpy="0 0 0" />
+                <material name="red" />
+            </visual>
+        </link>
+    </xacro:macro>
+    
+    <xacro:centre_knuckle_finger_link prefix="finger_2" length="0.11"/>
+    <xacro:centre_knuckle_finger_link prefix="finger_1" length = "0.075" />
+    <xacro:centre_knuckle_finger_link prefix="finger_3" length = "0.075" />
+    <xacro:centre_knuckle_finger_link prefix="thumb" length = "0.05" />   
+    <xacro:centre_knuckle_finger_link prefix="finger_4" length = "0.06" />
+
+
+
+    <xacro:macro name="top_knuckle_finger_link" params="prefix length">
+        <link name="${prefix}_top_knuckle_finger_link">
+            <visual>
+                <geometry>
+                    <cylinder radius="0.015" length="${length}" />
+                </geometry>
+                <origin xyz="0 0 0.025" rpy="0 0 0" />
+                <material name="red" />
+            </visual>
+        </link>
+    </xacro:macro>
+    
+    <xacro:top_knuckle_finger_link prefix="finger_2" length="0.07" />
+    <xacro:top_knuckle_finger_link prefix="finger_1" length="0.05"/>
+    <xacro:top_knuckle_finger_link prefix="finger_3" length="0.05"/>
+    <xacro:top_knuckle_finger_link prefix="finger_4" length="0.05"/>
+
+    <xacro:macro name="top_knuckle_finger_joint" params="prefix zorigin">
+        <joint name="${prefix}_top_knuckle_finger_joint" type="revolute">
+            <parent link="${prefix}_centre_knuckle_finger_link"/>
+            <child link="${prefix}_top_knuckle_finger_link"/>
+            <origin xyz="0 0 ${zorigin}" rpy="0 0 0"/>
+            <axis xyz = "1 0 0" />
+            <limit lower="0.0" upper = "1.57" effort="0" velocity= "0" />
+            <mimic joint="${prefix}_centre_knuckle_finger_joint" multiplier="1.5" offset="0"/>
+        </joint>
+    </xacro:macro>
+    
+    <xacro:top_knuckle_finger_joint prefix="finger_2" zorigin="0.11" />
+    <xacro:top_knuckle_finger_joint prefix="finger_1" zorigin="0.075" />
+    <xacro:top_knuckle_finger_joint prefix="finger_3" zorigin="0.075"  />
+    <xacro:top_knuckle_finger_joint prefix="finger_4" zorigin="0.06" />
+
+    
+    <xacro:macro name="centre_knuckle_finger_joint" params="prefix xorigin zorigin pitch" >
+        <joint name="${prefix}_centre_knuckle_finger_joint" type="revolute">
+            <parent link="${prefix}_finger_link"/>
+            <child link="${prefix}_centre_knuckle_finger_link"/>
+            <origin xyz="${xorigin} 0 ${zorigin}" rpy="0 ${pitch} 0"/>
+            <axis xyz = "1 0 0" />
+            <limit lower="0.0" upper = "1.57" effort="0" velocity= "0" />
+            <mimic joint="base_${prefix}_finger_joint" multiplier="1.5" offset="0"/>
+        </joint>
+    </xacro:macro>
+    
+    <xacro:centre_knuckle_finger_joint prefix="finger_2" xorigin="0" zorigin= "0.1" pitch="0" />
+    <xacro:centre_knuckle_finger_joint prefix="finger_1" xorigin="0" zorigin= "0.1" pitch="0" />
+    <xacro:centre_knuckle_finger_joint prefix="finger_3" xorigin="0" zorigin= "0.1" pitch="0" />
+    <xacro:centre_knuckle_finger_joint prefix="finger_4" xorigin="0" zorigin= "0.1" pitch="0" />
+    <xacro:centre_knuckle_finger_joint prefix="thumb" xorigin="0" zorigin= "0.1" pitch="0" />
+   
+
+
+    <xacro:macro name="base_finger_joints" params="prefix xorigin zorigin pitch">
+        <joint name="base_${prefix}_finger_joint" type="revolute">
+            <parent link="base_link"/>
+            <child link="${prefix}_finger_link"/>
+            <origin xyz="${xorigin} 0 ${zorigin}" rpy="0 ${pitch} 0"/>
+            <axis xyz = "1 0 0" />
+            <limit lower="0.0" upper = "1.57" effort="0" velocity= "0" />
+        </joint>
+    </xacro:macro>
+    
+    <xacro:base_finger_joints prefix="finger_2" xorigin="0.02" zorigin="0.3" pitch="0" />
+    <xacro:base_finger_joints prefix="finger_1" xorigin="0.09" zorigin="0.3" pitch="0" />
+    <xacro:base_finger_joints prefix="finger_3" xorigin="-0.045" zorigin="0.3" pitch="0" />
+    <xacro:base_finger_joints prefix="finger_4" xorigin="-0.11" zorigin="0.3" pitch="0" />
+    <xacro:base_finger_joints prefix="thumb" xorigin="0.15" zorigin="0.2" pitch="1" />
+
+
+</robot>
