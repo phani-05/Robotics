@@ -9,9 +9,9 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
 
-    pkg_bme_ros2_navigation = get_package_share_directory('bme_ros2_navigation')
+    pkg_amr = get_package_share_directory('amr')
 
-    gazebo_models_path, ignore_last_dir = os.path.split(pkg_bme_ros2_navigation)
+    gazebo_models_path, ignore_last_dir = os.path.split(pkg_amr)
     os.environ["GZ_SIM_RESOURCE_PATH"] += os.pathsep + gazebo_models_path
 
     rviz_launch_arg = DeclareLaunchArgument(
@@ -44,13 +44,13 @@ def generate_launch_description():
     )
 
     localization_params_path = os.path.join(
-        get_package_share_directory('bme_ros2_navigation'),
+        get_package_share_directory('amr'),
         'config',
         'amcl_localization.yaml'
     )
 
     map_file_path = os.path.join(
-        get_package_share_directory('bme_ros2_navigation'),
+        get_package_share_directory('amr'),
         'maps',
         'my_map.yaml'
     )
@@ -59,7 +59,7 @@ def generate_launch_description():
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
-        arguments=['-d', PathJoinSubstitution([pkg_bme_ros2_navigation, 'rviz', LaunchConfiguration('rviz_config')])],
+        arguments=['-d', PathJoinSubstitution([pkg_amr, 'rviz', LaunchConfiguration('rviz_config')])],
         condition=IfCondition(LaunchConfiguration('rviz')),
         parameters=[
             {'use_sim_time': LaunchConfiguration('use_sim_time')},

@@ -1,0 +1,324 @@
+
+<sdf version='1.10'>
+  <world name='empty'>
+    <physics name='1ms' type='ignored'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <plugin name='gz::sim::systems::Physics' filename='gz-sim-physics-system'/>
+    <plugin name='gz::sim::systems::UserCommands' filename='gz-sim-user-commands-system'/>
+    <plugin name='gz::sim::systems::SceneBroadcaster' filename='gz-sim-scene-broadcaster-system'/>
+    <plugin name='gz::sim::systems::Contact' filename='gz-sim-contact-system'/>
+    <gravity>0 0 -9.8000000000000007</gravity>
+    <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <scene>
+      <ambient>0.400000006 0.400000006 0.400000006 1</ambient>
+      <background>0.699999988 0.699999988 0.699999988 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <model name='ground_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.800000012 0.800000012 0.800000012 1</ambient>
+            <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+            <specular>0.800000012 0.800000012 0.800000012 1</specular>
+          </material>
+        </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3</name>
+      <pose>8.5897998809814453 -9.4420995712280273 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_1</name>
+      <pose>5.5703646484331264 -9.4197096599386931 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_2</name>
+      <pose>2.5531503461901801 -9.4316056739099938 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_3</name>
+      <pose>-0.25545273040252858 -9.4055055001398049 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_4</name>
+      <pose>-3.1750323984382232 -9.4539240457724887 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_5</name>
+      <pose>-6.1371782488583522 -9.3964766588236923 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11</name>
+      <pose>9.2592401504516602 7.7469501495361328 -4.440889980918258e-16 0 0 1.5485188126232674</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_1</name>
+      <pose>9.2209185821644066 4.8713679116288953 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_2</name>
+      <pose>9.2268888150444432 2.0387879737462091 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3</name>
+      <pose>9.1093316617158386 -0.96742430658648537 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_1</name>
+      <pose>9.0681789915743227 -3.9046154722123418 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_2</name>
+      <pose>8.9432531279212206 -6.748939705125407 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_0</name>
+      <pose>7.8807990550443865 9.5186478874699247 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_3</name>
+      <pose>2.8610624430316047 -8.0467652563591052 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_4</name>
+      <pose>2.8145313670085779 -5.1053168677038361 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_5</name>
+      <pose>2.8459898932751262 -2.1795597764008834 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_6</name>
+      <pose>4.8476641028257124 9.5358124810795797 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_6_1</name>
+      <pose>1.5973746774764375 9.2818327637829015 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_6_2</name>
+      <pose>-1.3618655405960274 9.1911750403327801 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_5_1</name>
+      <pose>-2.6149399522855195 7.5723699650053504 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_5_2</name>
+      <pose>-2.7627157401247331 4.9743140424161103 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_5_3</name>
+      <pose>-2.7472103199049265 2.4288880371620039 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_5_4</name>
+      <pose>-2.9126857856520787 -0.56247279142423334 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_6_1_1</name>
+      <pose>-4.2118899357631161 -1.9648618241349256 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_5_1_1</name>
+      <pose>-9.6706790182947397 -8.5603615561232527 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_5_1_2</name>
+      <pose>-9.6194781959822588 -6.1171013742620026 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_5_1_3</name>
+      <pose>-9.5980652937303699 -3.3585698919546463 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_5_1_4</name>
+      <pose>-9.5419481240671864 -0.8828000268040963 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_5_1_5</name>
+      <pose>-9.5936311563682519 2.1533359567934078 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_5_1_6</name>
+      <pose>-9.4941629694984417 5.1607690262183166 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_11_3_5_1_7</name>
+      <pose>-9.3623273615384495 7.8891482717274748 -8.8817799618365161e-16 0 0 1.548519992661801</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_6_2_1</name>
+      <pose>-4.3165025607812231 9.2221865345129732 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_6_2_2</name>
+      <pose>-7.1441745948445092 9.1593584602062279 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/brick_box_3x1x3</uri>
+      <name>brick_box_3x1x3_5_1</name>
+      <pose>-8.4961107021669537 -9.3379930183829281 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/Office Chair</uri>
+      <name>OfficeChair</name>
+      <pose>7.1120654018009954 5.2711571694860417 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/Table</uri>
+      <name>Table</name>
+      <pose>7.1491678941019714 6.6142990724698452 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/cafe_table</uri>
+      <name>cafe_table</name>
+      <pose>1.2431435662659625 -8.0354647386597549 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/beer</uri>
+      <name>beer</name>
+      <pose>1.4125297987798784 -8.7781049048619213 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/Sofa</uri>
+      <name>Sofa</name>
+      <pose>6.3294413326923715 -7.1710014671083311 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/MARBLE_HUSKY_SENSOR_CONFIG_2</uri>
+      <name>marble_husky_sensor_config_2</name>
+      <pose>-4.5527920537891937 8.0161870975283982 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/table_marble</uri>
+      <name>table_marble</name>
+      <pose>-0.34208775275668091 7.4908194395845458 0.64800000000000002 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/Mine Cart</uri>
+      <name>minecart</name>
+      <pose>-8.2396755440273903 -7.8578884885116231 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>file:///home/phani/gazebo_models/mailbox</uri>
+      <name>Mailbox</name>
+      <pose>3.8829760200226868 -2.8027958732611893 0 0 0 0</pose>
+    </include>
+    <light name='sun' type='directional'>
+      <pose>0 0 10 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>-0.5 0.10000000000000001 -0.90000000000000002</direction>
+      <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+      <specular>0.200000003 0.200000003 0.200000003 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.01</linear>
+        <constant>0.90000000000000002</constant>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <light name='directionallight' type='directional'>
+      <pose>3.8496043239762807 -7.9909802829405248 2 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0 0 -1</direction>
+      <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
+      <specular>0.200000003 0.200000003 0.200000003 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.01</linear>
+        <constant>0.90000000000000002</constant>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+  </world>
+</sdf
